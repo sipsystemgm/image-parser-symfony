@@ -14,8 +14,11 @@ cd image-parser-symfony
 ## docker
 ```ssh
 docker-compose up -d
+docker exec -it sip-php-cli composer install
 docker exec -it sip-php-cli php bin/console doctrine:database:create
 docker exec -it sip-php-cli php bin/console doctrine:migration:migrate
+docker exec -it sip-php-fpm npm install
+docker exec -it sip-php-fpm npm run build
 ```
 # Run
 
@@ -24,7 +27,7 @@ docker exec -it sip-php-cli php bin/console doctrine:migration:migrate
 # Try to avoid portals which use subdomain.
 # Sites with subdomains won't be saved!!!
 
-# example docker exec -it sip-php-cli php bin/console app:parser https://rozetka.com.ua 4 20
+# example docker exec -it sip-php-cli php bin/console app:parser https://some-site.com 4 20
 
 docker exec -it sip-php-cli php bin/console app:parser <url> [<deep> [<max-page>]]
 ```
