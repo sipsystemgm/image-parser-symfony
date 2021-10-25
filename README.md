@@ -2,7 +2,12 @@
 ## This is a simple component to parse images from html page.
 This component was developed to demonstrate  developing approaches only!!!
 
-# Install
+This functionality contains separate independent components:
+* https://github.com/sipsystemgm/reader
+* https://github.com/sipsystemgm/image-parser
+* https://github.com/sipsystemgm/reader-manager 
+
+# Installation
 
 ## clone this repository
 
