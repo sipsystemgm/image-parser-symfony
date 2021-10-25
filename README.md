@@ -4,6 +4,14 @@ This component was developed to demonstrate  developing approaches only!!!
 
 #Install
 
+## clone this repository
+
+```ssh
+git clone git@github.com:sipsystemgm/image-parser-symfony.git
+cd image-parser-symfony
+```
+
+##docker
 ```ssh
 docker-compose up -d
 docker exec -it sip-php-cli php bin/console doctrine:database:create
