@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site {{ site.name }}!{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">site {{ site.name }}</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <h2 class="display-6 text-center mb-4">Site: {{ site.name }}</h2>
+    <div class="table-responsive">
+
+        <table class="table table-bordered">
+            <tr>
+                {# sorting of properties based on query components #}
+                <th>Url</th>
+
+                <th style="min-width: 95px;">{{ knp_pagination_sortable(pagination, 'Images ', 'si.imagesLength') }}</th>
+                <th>Execution Time</th>
+                <th>Deep</th>
+            </tr>
+
+            {% for siteItem in pagination %}
+                <tr>
+                    <td>{{ siteItem.url }}</td>
+                    <td>{{ siteItem.imagesLength }}</td>
+                    <td>{{ siteItem.executionTime }}</td>
+                    <td>{{ siteItem.deep }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Image Parser!{% endblock %}
+
+{% block body %}
+    <h2 class="display-6 text-center mb-4">Sites</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                {# sorting of properties based on query components #}
+                <th>Url</th>
+                <th></th>
+            </tr>
+
+            {% for site in pagination %}
+                <tr>
+                    <td>{{ site.name }}</td>
+                    <td><a href="{{ path('site_item', {id:site.id}) }}">Show parsered informations</a> </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endblock %}

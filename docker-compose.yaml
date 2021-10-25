@@ -1,0 +1,62 @@
+version: '3.0'
+
+services:
+  nginx:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./app:/symfony
+    container_name: ${PROJECT_NAME}-nginx
+    restart: always
+    ports:
+      - "8081:80"
+
+  php-fpm:
+    build:
+      context: ./docker/php-fpm
+    volumes:
+      - ./app:/symfony
+    container_name: ${PROJECT_NAME}-php-fpm
+    depends_on:
+      - memcached
+      - mariadb
+      - redis
+
+  php-cli:
+    build:
+      context: ./docker/php-cli
+    volumes:
+      - ./app:/symfony
+    command: sleep 10000
+    container_name: ${PROJECT_NAME}-php-cli
+    depends_on:
+      - mariadb
+      - redis
+      - memcached
+    
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 63791:6379
+    logging:
+      driver: none
+    
+  memcached:
+    image: memcached
+    restart: always
+    
+volumes:
+    mariadb:
